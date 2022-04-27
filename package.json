@@ -1,0 +1,34 @@
+{
+  "name": "miki-whatsapp-bot",
+  "version": "0.0.0",
+  "description": "Feature-rich WhatsApp chatbot powered by Natural Language Processing.",
+  "main": "js/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riozec/miki-whatsapp-bot.git"
+  },
+  "keywords": [
+    "nodejs",
+    "javascript",
+    "nlp",
+    "bot",
+    "natural-language-processing",
+    "games",
+    "typescript",
+    "utilities",
+    "chatbot",
+    "whatsapp",
+    "whatsapp-bot",
+    "baileys",
+    "lolhuman"
+  ],
+  "author": "RiozeC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/riozec/miki-whatsapp-bot/issues"
+  },
+  "homepage": "https://github.com/riozec/miki-whatsapp-bot#readme"
+}
