@@ -1,2 +1,7 @@
 /node_modules
 /js
+/data
+/tmp
+.env
+yarn-error.log
+test.js
