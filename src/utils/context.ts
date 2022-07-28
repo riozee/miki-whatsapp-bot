@@ -386,19 +386,15 @@ export function createMessageContext(LOCALDB: Types.LOCALDB, bot: ReturnType<typ
 		arguments() {
 			const text = this.text().out?.trimStart();
 			if (text) {
-				if (this.isGroupChat().out) {
-					const idx = PREFIXES.findIndex((p) => text.startsWith(p));
-					if (idx !== -1) {
-						this._out = text.replace(new RegExp(`^${escapeRegExp(PREFIXES[idx])}\\s*\\S*\\s*`), "");
-					} else if (text.startsWith("@" + process.env.BOT_NUMBER)) {
-						this._out = text.replace(new RegExp(`^@${process.env.BOT_NUMBER}\\s*\\S*\\s*`), "");
-					} else if (this.quotedUserId().out === process.env.BOT_NUMBER + "@s.whatsapp.net") {
-						this._out = text.replace(/^\S*\s*/, "");
-					} else {
-						this._out = undefined;
-					}
-				} else {
+				const idx = PREFIXES.findIndex((p) => text.startsWith(p));
+				if (idx !== -1) {
+					this._out = text.replace(new RegExp(`^${escapeRegExp(PREFIXES[idx])}\\s*\\S*\\s*`), "");
+				} else if (text.startsWith("@" + process.env.BOT_NUMBER)) {
+					this._out = text.replace(new RegExp(`^@${process.env.BOT_NUMBER}\\s*\\S*\\s*`), "");
+				} else if (this.quotedUserId().out === process.env.BOT_NUMBER + "@s.whatsapp.net" || !this.isGroupChat().out) {
 					this._out = text.replace(/^\S*\s*/, "");
+				} else {
+					this._out = undefined;
 				}
 			} else {
 				this._out = undefined;
@@ -420,19 +416,15 @@ export function createMessageContext(LOCALDB: Types.LOCALDB, bot: ReturnType<typ
 		command() {
 			const text = this.text().out?.trimStart();
 			if (text) {
-				if (this.isGroupChat().out) {
-					const idx = PREFIXES.findIndex((p) => text.startsWith(p));
-					if (idx !== -1) {
-						this._out = new RegExp(`^${escapeRegExp(PREFIXES[idx])}\\s*(\\S+)\\s*`).exec(text)?.[1]?.toLowerCase();
-					} else if (text.startsWith("@" + process.env.BOT_NUMBER)) {
-						this._out = text.slice(`@${process.env.BOT_NUMBER}`.length).trimStart().split(/\s+/, 1)[0].toLowerCase() || undefined;
-					} else if (this.quotedUserId().out === process.env.BOT_NUMBER + "@s.whatsapp.net") {
-						this._out = text.split(/\s+/, 1)[0].toLowerCase();
-					} else {
-						this._out = undefined;
-					}
-				} else {
+				const idx = PREFIXES.findIndex((p) => text.startsWith(p));
+				if (idx !== -1) {
+					this._out = new RegExp(`^${escapeRegExp(PREFIXES[idx])}\\s*(\\S+)\\s*`).exec(text)?.[1]?.toLowerCase();
+				} else if (text.startsWith("@" + process.env.BOT_NUMBER)) {
+					this._out = text.slice(`@${process.env.BOT_NUMBER}`.length).trimStart().split(/\s+/, 1)[0].toLowerCase() || undefined;
+				} else if (this.quotedUserId().out === process.env.BOT_NUMBER + "@s.whatsapp.net" || !this.isGroupChat().out) {
 					this._out = text.split(/\s+/, 1)[0].toLowerCase();
+				} else {
+					this._out = undefined;
 				}
 			} else {
 				this._out = undefined;
