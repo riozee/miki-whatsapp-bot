@@ -118,7 +118,7 @@ import type * as Types from "./utils/typings/types";
 				} else {
 					console.error("Logged out from WhatsApp");
 					console.error("Removing old session");
-					fs.unlinkSync("./data/session.json");
+					fs.rmSync("./data/session", { recursive: true, force: true });
 					connectToWhatsApp(); //reconnect
 				}
 			} else if (connection === "connecting") {
