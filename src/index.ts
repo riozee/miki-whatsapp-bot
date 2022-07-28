@@ -46,7 +46,7 @@ import type * as Types from "./utils/typings/types";
 
 	// WhatsApp connection
 	(async function connectToWhatsApp() {
-		const { state, saveState } = Baileys.useSingleFileAuthState("./data/session.json");
+		const { state, saveCreds } = await Baileys.useMultiFileAuthState("./data/session");
 		const messageStore: { [key: string]: Baileys.WAProto.IMessage } = {};
 		const messageQueue: (() => Promise<void>)[] = [];
 
@@ -132,7 +132,7 @@ import type * as Types from "./utils/typings/types";
 		});
 
 		// session credentials handler
-		bot.ev.on("creds.update", () => saveState());
+		bot.ev.on("creds.update", () => saveCreds());
 
 		const MessageContext = createMessageContext(LOCALDB, bot, promptees);
 
