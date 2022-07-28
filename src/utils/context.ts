@@ -236,7 +236,7 @@ export function createMessageContext(LOCALDB: Types.LOCALDB, bot: ReturnType<typ
 			if (typeof content === "string") this._out = content;
 			else if ("text" in content) this._out = content.text!;
 			else if ("caption" in content) this._out = content.caption!;
-			else if ("singleSelectReply" in content) this._out = content.singleSelectReply?.selectedRowId!;
+			else if ("singleSelectReply" in content) this._out = content.title!;
 			else if ("selectedDisplayText" in content) this._out = content.selectedDisplayText!;
 			else if ("contentText" in content) this._out = content.contentText + "\n\n" + content.footerText;
 			else this._out = undefined;
@@ -256,7 +256,7 @@ export function createMessageContext(LOCALDB: Types.LOCALDB, bot: ReturnType<typ
 				if (typeof content === "string") this._out = content;
 				else if ("text" in content) this._out = content.text!;
 				else if ("caption" in content) this._out = content.caption!;
-				else if ("singleSelectReply" in content) this._out = content.singleSelectReply?.selectedRowId!;
+				else if ("singleSelectReply" in content) this._out = content.title!;
 				else if ("selectedDisplayText" in content) this._out = content.selectedDisplayText!;
 				else if ("contentText" in content) this._out = content.contentText + "\n\n" + content.footerText;
 				else this._out = undefined;
