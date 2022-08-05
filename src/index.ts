@@ -329,32 +329,3 @@ import type * as Types from "./utils/typings/types";
 	console.error(e);
 	process.exit(1);
 });
-
-/* UNUSED */
-
-/* src/index.js:30 */
-// // watch for file changes
-// if (process.argv.includes("--watch")) {
-// 	// temporary solution
-// 	const _dir = dir.replace("\\js\\", "\\src\\");
-// 	let watcher = (function watch() {
-// 		return fs.watch(_dir, { persistent: false }, (event, filename) => {
-// 			watcher.close();
-// 			const _path = path.join(_dir, filename);
-// 			const _jspath = path.join(dir, filename.replace(".ts", ".js"));
-// 			if (!fs.existsSync(_path)) return console.log(`Deleted ${filename}. Please restart the bot to see the effect.`);
-// 			console.log(`Reloading ${filename}...`);
-// 			exec("./node_modules/.bin/tsc", () => {
-// 				try {
-// 					delete require.cache[_jspath];
-// 					require(_jspath);
-// 					console.log(`${filename} loaded.`);
-// 				} catch (e) {
-// 					console.error(e);
-// 				} finally {
-// 					watcher = watch();
-// 				}
-// 			});
-// 		});
-// 	})();
-// }

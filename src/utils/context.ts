@@ -602,26 +602,3 @@ export function createGroupParticipantsUpdateContext(LOCALDB: Types.LOCALDB, bot
 	};
 }
 export type GroupParticipantsUpdateContext = ReturnType<typeof createGroupParticipantsUpdateContext>["prototype"];
-
-/* UNUSED */
-
-/* context.ts:467 */
-// /**
-//  * Object contains the result of NLP processing on the text. Only exists if the message contains text.
-//  *
-//  * @see - https://npmjs.com/node-nlp
-//  */
-// 	nlp?: {
-// 	intent: `${"None" | `command.${number}` | `intent.${string | number}`}`;
-// 	locale: "id" | "en";
-// 	entities: {
-// 		start: number;
-// 		end: number;
-// 		len: number;
-// 		accuracy: number;
-// 		sourceText: string;
-// 		utteranceText: string;
-// 		entity: string;
-// 	}[];
-// 	answer?: string;
-// };
