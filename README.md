@@ -44,9 +44,6 @@ ERROR_REPORT_NUMBER="1234567890"
 PREFIX="!@#$%^&*"
 ```
 
-### Command Line Arguments
-
--   `--baileys-debug` (set Baileys log level to `debug`)
 
 ## Commands List
 

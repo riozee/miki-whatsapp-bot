@@ -1,31 +1,21 @@
 import "dotenv/config";
-import makeWASocket, * as Baileys from "@adiwajshing/baileys";
+import makeWASocket, * as Baileys from "@whiskeysockets/baileys";
 import { createMessageContext } from "./utils";
 import Promptees from "promptees";
 import axios from "axios";
 import * as fs from "fs";
-import P from "pino";
 
 import type * as Types from "./utils/typings/types";
 
 (async () => {
 	const PIN = String(Math.floor(Math.random() * 999999));
 	console.log("Your PIN: " + PIN);
-	const { state, saveState } = Baileys.useSingleFileAuthState("./data/session.json");
-
-	let version: [number, number, number] | undefined = undefined;
-	do {
-		try {
-			version = (await axios.get("https://web.whatsapp.com/check-update?version=0&platform=web")).data.currentVersion?.split(".").map(Number) || [2, 2204, 13];
-			console.log("Using WA Web version " + version?.join("."));
-		} catch {}
-	} while (!version);
+	const { state, saveCreds } = await Baileys.useMultiFileAuthState("./data/session");
 
 	const bot = makeWASocket({
-		logger: P({ level: "silent" }),
 		printQRInTerminal: true,
 		browser: Baileys.Browsers.appropriate("Miki"),
-		version: version,
+		version: (await Baileys.fetchLatestBaileysVersion()).version,
 		auth: state,
 	});
 
@@ -41,7 +31,7 @@ import type * as Types from "./utils/typings/types";
 		}
 	});
 
-	bot.ev.on("creds.update", () => saveState());
+	bot.ev.on("creds.update", () => saveCreds());
 
 	const promptees = new Promptees();
 	const Context = createMessageContext({}, bot, promptees);

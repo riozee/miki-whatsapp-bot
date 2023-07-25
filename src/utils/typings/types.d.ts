@@ -1,4 +1,4 @@
-import type * as Baileys from "@adiwajshing/baileys";
+import type * as Baileys from "@whiskeysockets/baileys";
 import type { MessageContext, GroupParticipantsUpdateContext } from "..";
 
 export type LOCALDB = { [key: string]: GROUPDB | USERDB | SYSTEMDB };

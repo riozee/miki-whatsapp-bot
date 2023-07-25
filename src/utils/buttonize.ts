@@ -1,4 +1,4 @@
-import type * as Baileys from "@adiwajshing/baileys";
+import type * as Baileys from "@whiskeysockets/baileys";
 const random = () => Math.floor(Math.random() * 10 ** 6);
 
 type Templatable = {
@@ -59,7 +59,7 @@ export function tbtn(buttons: TButtons, footer?: string) {
 }
 
 type Buttonable = {
-	buttons?: Baileys.proto.IButton[];
+	buttons?: Baileys.proto.Message.ButtonsMessage.IButton[];
 };
 type Buttons = Array<string | { text: string; id: string }>;
 export function btn(buttons: Buttons) {
@@ -79,7 +79,7 @@ export function btn(buttons: Buttons) {
 }
 
 type Listable = {
-	sections?: Baileys.proto.ISection[];
+	sections?: Baileys.proto.Message.ListMessage.ISection[];
 	title?: string;
 	buttonText?: string;
 };
@@ -98,7 +98,7 @@ export function list(list: List, footer?: string) {
 	}
 	if (isSection(itemsOrSections)) {
 		for (const section of itemsOrSections) {
-			const sectionRows: Baileys.proto.IRow[] = [];
+			const sectionRows: Baileys.proto.Message.ListMessage.IRow[] = [];
 			for (const [idx, row] of Object.entries(section.items)) {
 				sectionRows.push({
 					title: typeof row === "string" ? row : Array.isArray(row) ? row[0] : row.itemTitle,
@@ -112,7 +112,7 @@ export function list(list: List, footer?: string) {
 			});
 		}
 	} else {
-		const sectionRows: Baileys.proto.IRow[] = [];
+		const sectionRows: Baileys.proto.Message.ListMessage.IRow[] = [];
 		for (const [idx, item] of Object.entries(itemsOrSections)) {
 			sectionRows.push({
 				title: typeof item === "string" ? item : Array.isArray(item) ? item[0] : item.itemTitle,

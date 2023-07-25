@@ -1,11 +1,10 @@
-import P from "pino";
 import "dotenv/config";
 import path from "path";
 import * as fs from "fs";
 import axios from "axios";
 import Promptees from "promptees";
 import * as fsp from "fs/promises";
-import makeWASocket, * as Baileys from "@adiwajshing/baileys";
+import makeWASocket, * as Baileys from '@whiskeysockets/baileys';
 import { MessageContext, createMessageContext, GroupParticipantsUpdateContext, createGroupParticipantsUpdateContext, btn } from "./utils";
 
 import type * as Types from "./utils/typings/types";
@@ -63,23 +62,29 @@ import type * as Types from "./utils/typings/types";
 			queueIntervalId = setTimeout(sendQueue, interval);
 		})();
 
-		// check and use the latest version of WA Web
-		let version: [number, number, number] | undefined = undefined;
-		do {
-			try {
-				version = (await axios.get("https://web.whatsapp.com/check-update?version=0&platform=web")).data.currentVersion?.split(".").map(Number) || [2, 2204, 13];
-				console.log("Using WA Web version " + version?.join("."));
-			} catch {}
-		} while (!version);
-
 		// initialize WA connection
 		const bot = makeWASocket({
-			logger: P({ level: process.argv.includes("--baileys-debug") ? "debug" : "silent" }),
 			printQRInTerminal: true,
 			browser: Baileys.Browsers.appropriate("Miki"),
-			version: version,
+			version: (await Baileys.fetchLatestBaileysVersion()).version,
 			auth: state,
 			getMessage: async (key) => (key.id ? messageStore[key.id] : undefined),
+			patchMessageBeforeSending: (message) => {
+                if (message.buttonsMessage || message.templateMessage || message.listMessage) {
+                    message = {
+                        viewOnceMessage: {
+                            message: {
+                                messageContextInfo: {
+                                    deviceListMetadataVersion: 2,
+                                    deviceListMetadata: {},
+                                },
+                                ...message,
+                            },
+                        },
+                    };
+                }
+				return message;
+            },
 		});
 
 		// overwrite sendMessage so it can save and push messages

@@ -1,5 +1,5 @@
 import { MessageContext, btn, basicTexts } from "./";
-import * as Baileys from "@adiwajshing/baileys";
+import * as Baileys from "@whiskeysockets/baileys";
 
 type msgType = [
 	string,

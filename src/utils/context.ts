@@ -1,5 +1,5 @@
 import type * as Types from "./typings/types";
-import makeWASocket, * as Baileys from "@adiwajshing/baileys";
+import makeWASocket, * as Baileys from "@whiskeysockets/baileys";
 import Promptees, { PrompteesOpts } from "promptees";
 import { escapeRegExp } from "lodash";
 const PREFIXES = process.env.PREFIX?.split("") || ["/"];

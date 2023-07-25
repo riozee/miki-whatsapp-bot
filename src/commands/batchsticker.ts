@@ -55,7 +55,7 @@ command.new({
 			const quotedContent = response.quotedMsgContent().out;
 			const isValid = (_content: typeof content | typeof quotedContent) => {
 				if (typeof _content !== "string" && _content && "mimetype" in _content && supportedMimeTypes.some((v) => v[0] === _content.mimetype)) {
-					if (_content.fileLength! < 1500000) return true;
+					if (Number(_content.fileLength) < 1500000) return true;
 				}
 				return false;
 			};
@@ -152,7 +152,7 @@ function generateExif(pack: string = "", author: string = "") {
 		"sticker-pack-publisher": author,
 	});
 	// @ts-ignore
-	let len = new TextEncoder("utf-8").encode(json).length;
+	let len: number | string = new TextEncoder("utf-8").encode(json).length;
 	const f = Buffer.from([0x49, 0x49, 0x2a, 0x00, 0x08, 0x00, 0x00, 0x00, 0x01, 0x00, 0x41, 0x57, 0x07, 0x00]);
 	const code = [0x00, 0x00, 0x16, 0x00, 0x00, 0x00];
 	len > 256 ? ((len = len - 256), code.unshift(0x01)) : code.unshift(0x00);
