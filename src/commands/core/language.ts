@@ -1,4 +1,4 @@
-import { command, list, requestArguments } from "../../utils";
+import { command, requestArguments } from "../../utils";
 
 const LANGUAGES = {
 	ID: "Bahasa Indonesia",

@@ -1,4 +1,4 @@
-import { command, btn, basicTexts, saveFile, randomFileName } from "../utils";
+import { command, basicTexts, saveFile, randomFileName } from "../utils";
 import { exec } from "child_process";
 
 const TEXTS = {
@@ -6,14 +6,14 @@ const TEXTS = {
 		PROCESSING: (number: number) => "Memproses " + number + " stiker...",
 		FAILED: (number: number) => "Gagal memproses " + number + " stiker.",
 		DONE: () => "Selesai",
-		ASK: () => "Silahkan kirim atau balas ke beberapa stiker. *Maksimal 20*",
+		ASK: () => "Silahkan kirim atau balas ke beberapa stiker. *Maksimal 20*\n\nKetik *selesai* jika selesai atau *batal*.",
 		NOTSTICKER: () => "Itu bukan stiker.",
 	},
 	en: {
 		PROCESSING: (number: number) => "Processing " + number + " sticker" + (number === 1 ? "" : "s") + "...",
 		FAILED: (number: number) => "Failed processing " + number + " sticker" + (number === 1 ? "" : "s") + ".",
 		DONE: () => "Done",
-		ASK: () => "Please send or reply to one or more stickers. *Max 20*",
+		ASK: () => "Please send or reply to one or more stickers. *Max 20*\n\nType *done* if done or *cancel*.",
 		NOTSTICKER: () => "That's not a sticker.",
 	},
 };
@@ -23,7 +23,6 @@ command.new({
 		const language = context.language().out;
 		context.reply({
 			text: TEXTS[language].ASK(),
-			...btn([TEXTS[language].DONE(), basicTexts[language].CANCEL()]),
 		});
 		const media: typeof context[] = [];
 		const quotedMedia: typeof context[] = [];

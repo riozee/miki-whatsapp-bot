@@ -1,12 +1,12 @@
-import { command, basicTexts, btn } from "../../utils";
+import { command, basicTexts } from "../../utils";
 
 const TEXTS = {
 	id: {
-		NOARG: () => "Silahkan kirimkan pesan teks atau media yang ingin diteruskan ke developer Miki Bot...",
+		NOARG: () => "Silahkan kirimkan pesan teks atau media yang ingin diteruskan ke developer Miki Bot...\n\nKetik *batal* untuk membatalkan.",
 		DONE: () => "Pesan telah diteruskan. Terima kasih atas partisipasinya!",
 	},
 	en: {
-		NOARG: () => "Please send a text or media message to be forwarded to developer of Miki Bot...",
+		NOARG: () => "Please send a text or media message to be forwarded to developer of Miki Bot...\n\nType *cancel* to cancel.",
 		DONE: () => "Message has been forwarded. Thank you for your participation!",
 	},
 };
@@ -18,7 +18,7 @@ command.new({
 		const _dest = process.env.FEEDBACK_NUMBER || process.env.OWNER_NUMBER;
 		const dest = _dest?.endsWith("@g.us") ? _dest : _dest + "@s.whatsapp.net";
 		if (!arg) {
-			const _context = await context.reply({ text: TEXTS[language].NOARG(), ...btn([basicTexts[language].CANCEL()]) }).waitInput().out;
+			const _context = await context.reply({ text: TEXTS[language].NOARG() }).waitInput().out;
 			if (_context === "timeout" || _context.text().out?.toLowerCase() === basicTexts[language].CANCEL().toLowerCase()) {
 				return context.reply({ text: basicTexts[language].CANCELED() });
 			}

@@ -1,4 +1,4 @@
-import { MessageContext, btn, basicTexts } from "./";
+import { MessageContext, basicTexts } from "./";
 
 type argType = [
 	string,
@@ -18,15 +18,15 @@ type argsShape = {
 
 const TEXTS = {
 	id: {
-		ARG_MISSING: (name: string) => `Silahkan kirim ${name}...`,
-		ARG_WRONG: (name: string) => `Data yang kamu masukkan tidak valid.\n\nSilahkan kirim ulang ${name}...`,
-		BTN_CANCEL: () => "Batal",
+		ARG_MISSING: (name: string) => `Silahkan kirim ${name}...\n\nKetik *batal* untuk membatalkan.`,
+		ARG_WRONG: (name: string) => `Data yang kamu masukkan tidak valid.\n\nSilahkan kirim ulang ${name}...\n\nKetik *batal* untuk membatalkan.`,
+		CANCEL: () => "Batal",
 		CANCELED: () => basicTexts.id.CANCELED(),
 	},
 	en: {
-		ARG_MISSING: (name: string) => `Please enter the ${name}...`,
-		ARG_WRONG: (name: string) => `The data you've sent is not valid.\n\nPlease reenter the ${name}...`,
-		BTN_CANCEL: () => "Cancel",
+		ARG_MISSING: (name: string) => `Please enter the ${name}...\n\nType *cancel* to cancel`,
+		ARG_WRONG: (name: string) => `The data you've sent is not valid.\n\nPlease reenter the ${name}...\n\nType *cancel* to cancel`,
+		CANCEL: () => "Cancel",
 		CANCELED: () => basicTexts.en.CANCELED(),
 	},
 };
@@ -65,7 +65,7 @@ export async function requestArguments(context: MessageContext, shape: argsShape
 	const args: string[] = text ? (typeof shape.separator === "function" ? shape.separator(text) : text.split(shape.separator ?? /\s+/g)) : [];
 	function isCanceled(response: MessageContext | "timeout"): response is "timeout" {
 		if (response === "timeout") return true;
-		if (new RegExp(`^${TEXTS[lang].BTN_CANCEL()}$`, "i").test(response.text().out || "")) return true;
+		if (new RegExp(`^${TEXTS[lang].CANCEL()}$`, "i").test(response.text().out || "")) return true;
 		return false;
 	}
 
@@ -82,7 +82,6 @@ export async function requestArguments(context: MessageContext, shape: argsShape
 								: typeof argShape[2]?.onMissing === "function"
 								? argShape[2].onMissing(context)
 								: TEXTS[lang].ARG_MISSING(argShape[0]),
-						...btn([TEXTS[lang].BTN_CANCEL()]),
 					})
 					.waitInput().out;
 				if (isCanceled(response)) {
@@ -108,8 +107,7 @@ export async function requestArguments(context: MessageContext, shape: argsShape
 									? argShape[2].onWrong
 									: typeof argShape[2]?.onWrong === "function"
 									? argShape[2].onWrong(context)
-									: TEXTS[lang].ARG_WRONG(argShape[0]),
-							...btn([TEXTS[lang].BTN_CANCEL()]),
+									: TEXTS[lang].ARG_WRONG(argShape[0])
 						})
 						.waitInput().out;
 					if (isCanceled(response)) {

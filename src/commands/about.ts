@@ -1,12 +1,11 @@
-import { command, tbtn } from "../utils";
+import { command } from "../utils";
 
 command.new({
 	onCommand: (context) => {
 		const ums = process.uptime() * 1000;
 		const f = Math.floor;
 		context.reply({
-			text: `\n\n*Miki Bot* 🍙\n\nUptime: *${f(ums / 3_600_000)}:${f((ums / 60000) % 60)}:${f((ums / 1000) % 60)}.${f(ums % 1000)}*\n\n`,
-			...tbtn([{ url: "https://github.com/riozec/miki-whatsapp-bot", text: "GitHub" }], "(c) Rioze"),
+			text: `\n\n*Miki Bot* 🍙\n\nUptime: *${f(ums / 3_600_000)}:${f((ums / 60000) % 60)}:${f((ums / 1000) % 60)}.${f(ums % 1000)}*\n\nhttps://github.com/riozee/miki-whatsapp-bot`,
 		});
 	},
 	metadata: {

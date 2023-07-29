@@ -5,7 +5,7 @@ import axios from "axios";
 import Promptees from "promptees";
 import * as fsp from "fs/promises";
 import makeWASocket, * as Baileys from '@whiskeysockets/baileys';
-import { MessageContext, createMessageContext, GroupParticipantsUpdateContext, createGroupParticipantsUpdateContext, btn } from "./utils";
+import { MessageContext, createMessageContext, GroupParticipantsUpdateContext, createGroupParticipantsUpdateContext } from "./utils";
 
 import type * as Types from "./utils/typings/types";
 
@@ -238,7 +238,6 @@ import type * as Types from "./utils/typings/types";
 						else {
 							return context.react("🤷‍♀️").reply({
 								text: TEXTS.CMD_NOT_FOUND(),
-								...btn(["/feedback"]),
 							});
 						}
 					}
@@ -284,7 +283,7 @@ import type * as Types from "./utils/typings/types";
 						const time = (a: number, b: number) => Math.floor((now - lastPremCmdDiff) / a) % b;
 						return context
 							.react("💲")
-							.reply({ text: TEXTS.PREMIUM_LIMIT(`${time(3_600_000, 1)}:${time(60_000, 60)}:${time(1_000, 60)}`), ...btn(["/premium"]) });
+							.reply({ text: TEXTS.PREMIUM_LIMIT(`${time(3_600_000, 1)}:${time(60_000, 60)}:${time(1_000, 60)}`) });
 					}
 					// send description if first time
 					if (!user_data.stats.hits[cmdName]) {

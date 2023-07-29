@@ -5,4 +5,3 @@
 .env
 yarn-error.log
 test.js
-yarn.lock

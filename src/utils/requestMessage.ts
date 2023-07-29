@@ -1,4 +1,4 @@
-import { MessageContext, btn, basicTexts } from "./";
+import { MessageContext, basicTexts } from "./";
 import * as Baileys from "@whiskeysockets/baileys";
 
 type msgType = [
@@ -17,15 +17,15 @@ type msgShape = {
 
 const TEXTS = {
 	id: {
-		MSG_MISSING: (name: string) => `Silahkan kirim ${name}...`,
-		MSG_WRONG: (name: string) => `Pesan bukan ${name}.\n\nSilahkan ulangi...`,
-		BTN_CANCEL: () => "Batal",
+		MSG_MISSING: (name: string) => `Silahkan kirim ${name}...\n\nKetik *batal* untuk membatalkan.`,
+		MSG_WRONG: (name: string) => `Pesan bukan ${name}.\n\nSilahkan ulangi...\n\nKetik *batal* untuk membatalkan.`,
+		CANCEL: () => "Batal",
 		CANCELED: () => basicTexts.id.CANCELED(),
 	},
 	en: {
-		MSG_MISSING: (name: string) => `Please send a(n) ${name}...`,
-		MSG_WRONG: (name: string) => `The message is not a(n) ${name}.\n\nPlease resend...`,
-		BTN_CANCEL: () => "Cancel",
+		MSG_MISSING: (name: string) => `Please send a(n) ${name}...\n\nType *cancel* to cancel`,
+		MSG_WRONG: (name: string) => `The message is not a(n) ${name}.\n\nPlease resend...\n\nType *cancel* to cancel`,
+		CANCEL: () => "Cancel",
 		CANCELED: () => basicTexts.en.CANCELED(),
 	},
 };
@@ -45,7 +45,7 @@ export async function requestMessage(context: MessageContext, shape: msgShape): 
 	const lang = context.language().out;
 	function isCanceled(response: MessageContext | "timeout"): response is "timeout" {
 		if (response === "timeout") return true;
-		if (new RegExp(`^${TEXTS[lang].BTN_CANCEL()}$`, "i").test(response.text().out || "")) return true;
+		if (new RegExp(`^${TEXTS[lang].CANCEL()}$`, "i").test(response.text().out || "")) return true;
 		return false;
 	}
 	function getCustomInput() {
@@ -62,8 +62,7 @@ export async function requestMessage(context: MessageContext, shape: msgShape): 
 					? msgShape[2].onMissing
 					: typeof msgShape[2]?.onMissing === "function"
 					? msgShape[2].onMissing(context)
-					: TEXTS[lang].MSG_MISSING(msgShape[0]),
-			...btn([TEXTS[lang].BTN_CANCEL()]),
+					: TEXTS[lang].MSG_MISSING(msgShape[0])
 		};
 		while (true) {
 			let isCustomInput: any;
@@ -83,8 +82,7 @@ export async function requestMessage(context: MessageContext, shape: msgShape): 
 								? msgShape[2].onWrong
 								: typeof msgShape[2]?.onWrong === "function"
 								? msgShape[2].onWrong(response)
-								: TEXTS[lang].MSG_WRONG(msgShape[0]),
-						...btn([TEXTS[lang].BTN_CANCEL()]),
+								: TEXTS[lang].MSG_WRONG(msgShape[0])
 					};
 				}
 				continue;

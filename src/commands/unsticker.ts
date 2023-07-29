@@ -24,10 +24,10 @@ command.new({
 
 		let file: string;
 		let isAnimated = false;
-		if (isValid(context.quotedMsgContent().out)) {
+		const qContent = context.quotedMsgContent().out;
+		if (isValid(qContent)) {
 			file = await saveFile((await context.quotedMedia("stream").out)!);
-			const qContent = context.quotedMsgContent().out!;
-			if (typeof qContent !== "string" && "isAnimated" in qContent && qContent.isAnimated) isAnimated = true;
+			if (typeof qContent !== "string" && "isAnimated" in qContent! && qContent.isAnimated) isAnimated = true;
 		} else {
 			const [stickerContext] = await requestMessage(context, {
 				messages: [[TEXTS[language].STICKER(), (c) => isValid(c.msgContent().out) || isValid(c.quotedMsgContent().out)]],

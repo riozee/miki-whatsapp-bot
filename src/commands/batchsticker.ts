@@ -1,4 +1,4 @@
-import { basicTexts, btn, command, randomFileName, saveFile } from "../utils";
+import { basicTexts, command, randomFileName, saveFile } from "../utils";
 import { exec } from "child_process";
 import * as fs from "fs";
 
@@ -22,7 +22,7 @@ const TEXTS = {
 		PROCESSING: (number: number) => "Memproses " + number + " media...",
 		FAILED: (number: number) => "Gagal memproses " + number + " media.",
 		DONE: () => "Selesai",
-		ASK: () => "Silahkan kirim atau balas ke beberapa pesan gambar, video atau dokumen. *Maksimal 20*",
+		ASK: () => "Silahkan kirim atau balas ke beberapa pesan gambar, video atau dokumen. *Maksimal 20*\n\nType *done* if done or *cancel*.",
 		SUPPORTED: (supported: string) => "Format yang didukung: " + supported + " (maksimal 1,5 MB)",
 	},
 	en: {
@@ -30,7 +30,7 @@ const TEXTS = {
 		PROCESSING: (number: number) => "Processing " + number + " media...",
 		FAILED: (number: number) => "Failed processing " + number + " media.",
 		DONE: () => "Done",
-		ASK: () => "Please send or reply to one or more image, video or document messages. *Max 20*",
+		ASK: () => "Please send or reply to one or more image, video or document messages. *Max 20*\n\nType *done* if done or *cancel*.",
 		SUPPORTED: (supported: string) => "Supported formats: " + supported + " (max 1.5 MB)",
 	},
 };
@@ -40,7 +40,6 @@ command.new({
 		const language = context.language().out;
 		context.reply({
 			text: TEXTS[language].ASK() + "\n\n" + TEXTS[language].SUPPORTED(supportedList),
-			...btn([TEXTS[language].DONE(), basicTexts[language].CANCEL()]),
 		});
 		const media: typeof context[] = [];
 		const quotedMedia: typeof context[] = [];

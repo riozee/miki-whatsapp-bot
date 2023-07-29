@@ -33,7 +33,7 @@ export const basicTexts = {
 		CANCELED: () => `Operasi dibatalkan.`,
 		CANCEL: () => "Batal",
 		PREMIUM_LIMIT: (time: string) =>
-			`Kamu hanya dapat menggunakan perintah Premium sekali sehari. Berlangganan Premium sekarang untuk mendapatkan akses tanpa batas.\n\nTunggu ${time} lagi untuk menggunakan perintah Premium.`,
+			`Kamu hanya dapat menggunakan perintah Premium sekali sehari. Berlangganan Premium sekarang untuk mendapatkan akses tanpa batas. Ketik */premium* untuk selengkapnya.\n\nTunggu ${time} lagi untuk menggunakan perintah Premium.`,
 		ERROR: () =>
 			"Terjadi kesalahan pada sistem Miki. Mohon maaf atas ketidaknyamanannya. Silahkan coba beberapa saat lagi atau laporkan dengan perintah */feedback*.",
 	},
