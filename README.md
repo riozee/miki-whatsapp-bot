@@ -2,19 +2,27 @@
 
 Another WhatsApp bot with super clean code design. Written in TypeScript.
 
-&nbsp;
-&nbsp;
-
+> Warning: non-english
+![how to create a new command, annotated using handwriting](res/readme/wleowleo.png)
+> English below  
+>
 >Download and send messages
-![Alt Text](res/readme/message.gif)
+![Download and send messages](res/readme/message.gif)
 >Create new commands
-![Alt Text](res/readme/command.gif)
-![Alt Text](res/readme/metadata.gif)
-> Aaaaand much more
-![Alt Text](res/readme/context.gif)
+![Create new commands](res/readme/command.gif)
+![Create new commands](res/readme/metadata.gif)
+> Aaaaand many more
+![Aaaaand many more](res/readme/context.gif)
 
-&nbsp;
-&nbsp;
+## How to Contribute
+Please fork the repository and make changes as you'd like.
+Steps to contribute:
+1. Fork this repository
+2. Create your feature branch (git checkout -b feature/newFeature)
+3. Commit your changes (git commit -am 'Add some feature ...')
+4. Push to the branch (git push origin feature/newFeature)
+5. Create a new Pull Request
+
 
 ## Requirements (Prerequisites)
 
@@ -83,15 +91,6 @@ npm start
 | 17  | unsticker/unsticker/uns | all           | ✔      |
 | 18  | batchsticker            | all (premium) | ✔      |
 | 19  | batchunsticker          | all (premium) | ✔      |
-
-## How to Contribute
-If you'd like to contribute, please fork the repository and make changes as you'd like. Pull requests are warmly welcome.
-Steps to contribute:
-1. Fork this repository
-2. Create your feature branch (git checkout -b feature/newFeature)
-3. Commit your changes (git commit -am 'Add some feature ...')
-4. Push to the branch (git push origin feature/newFeature)
-5. Create a new Pull Request
 
 ## Authors
 Rioze [![telegram](https://img.shields.io/badge/Telegram-2CA5E0)](https://t.me/riozee) 
