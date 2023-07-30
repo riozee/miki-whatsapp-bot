@@ -1,11 +1,10 @@
 import "dotenv/config";
 import path from "path";
 import * as fs from "fs";
-import axios from "axios";
 import Promptees from "promptees";
 import * as fsp from "fs/promises";
 import makeWASocket, * as Baileys from '@whiskeysockets/baileys';
-import { MessageContext, createMessageContext, GroupParticipantsUpdateContext, createGroupParticipantsUpdateContext } from "./utils";
+import { MessageContext, createMessageContext, createGroupParticipantsUpdateContext } from "./utils";
 
 import type * as Types from "./utils/typings/types";
 
